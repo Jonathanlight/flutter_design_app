@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.pink,
       ),
       home: MyHomePage(title: 'Flutter'),
     );
@@ -43,8 +43,69 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: ListView(
         children: <Widget>[
-          
+          _buildListItem('Delicious hot dog', 4.0, '9.79', widget.gateaux[0]),
+          _buildListItem('Pizza', 4.0, '10.79', widget.gateaux[1]),
+          _buildListItem('Tomates', 4.0, '9.79', widget.gateaux[2]),
+          _buildListItem('Delicious', 4.0, '9.79', widget.gateaux[3]),
         ]
+      ),
+    );
+  }
+  
+  _buildListItem(String foodName, rating, String price, String imgPath) {
+    return Padding(
+      padding: EdgeInsets.all(15.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: <Widget>[
+          Container(
+            width: 210.0,
+            child: Row(
+              children: [
+                Container(
+                  height: 75.0,
+                  width: 75.0,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(7.0),
+                    color: Colors.black
+                  ),
+                  child: Center(
+                    child: Image.network(imgPath, height: 50.0, width: 50.0)
+                  )
+                ),
+                SizedBox(width: 20.0),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children:<Widget>[
+                    Text(
+                      foodName,
+                    ),
+                    Row(
+                      children: <Widget>[
+                        Text(
+                          '\$' + price,
+                        ),
+                        SizedBox(width: 3.0),
+                        Text(
+                          '\$' + '18',
+                        )
+                      ],
+                    )
+                  ], 
+                )
+              ]
+            ),
+          ),
+          FloatingActionButton(
+            heroTag: foodName,
+            mini: true,
+            onPressed: () {},
+            child: Center(
+              child: Icon(Icons.add, color: Colors.white)
+            ),
+            backgroundColor: Colors.pink
+          )
+        ],
       ),
     );
   }
